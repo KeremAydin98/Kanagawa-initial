@@ -1,0 +1,13 @@
+header h1 a {
+    color: 'blue';
+
+}
+
+.nav-left {
+margin-right: auto;
+}
+
+.nav-right {
+display: flex;
+padding-top: 2rem;
+}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        {% if user.is_authenticated %}
+            <p>Welcome {{user.username}}</p>
+            <a href="{% url 'logout' %}">Log out</a>
+            <div class="nav-right">
+                <a href="{% url 'product_new' %}">+ New</a>
+            </div>
+        {% else %}
+            <p>Welcome guest</p>
+            <p><a href="{% url 'login' %}">Log In</a> | <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </div>
+    {% for product in product_list %}
+        <div class="post-entry">
+            <h3><a href="{% url 'product_detail' product.pk %}">{{product.product_name}}</a></h3>
+            <p> {{ product.product_price }}{{product.currency}}</p>
+        </div>
+        <div class="card-footer">
+            {% for comment in product.comments.all %}
+            <p>
+                <span class="font-weight-bold">
+                    {{ comment.author }} &middot;
+                </span>
+                {{ comment }}
+            </p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock content %}
